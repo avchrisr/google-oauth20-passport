@@ -1,0 +1,5 @@
+node_modules/
+config/variables.env
+public/uploads/*
+temp/
+**/*.zip

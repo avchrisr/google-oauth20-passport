@@ -87,22 +87,27 @@ app.use(cors())
 
 // ------------  oauth passport related code  ------------
 
-// Sessions
-app.use(
-    session({
-        secret: 'my secret cat',
-        resave: false,
-        saveUninitialized: false,
+const sessionOptions = {
+    secret: 'my secret cat',        // enables encryption. Recommended (especially when working with sensitive session data)
+    resave: false,                  // don't save session if not modified
+    saveUninitialized: false,       // don't create session until something stored
 
-        // automatically store express session in MongoDB
-        store: new MongoStore({ mongooseConnection: mongoose.connection })
-    })
-)
+    // automatically store express session in MongoDB
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}
+
+if (NODE_ENV === 'production') {
+    // If you have your node.js behind a proxy and are using { secure: true }, you need to set "trust proxy" in express
+    app.set('trust proxy', 1)    // trust first proxy.
+    sessionOptions.cookie = { secure: true }      // use https. if accessed via http, the cookie will not be set
+}
+
+// Sessions
+app.use(session(sessionOptions))
 
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 // Handlebars -- server-rendered view templating enigne
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))

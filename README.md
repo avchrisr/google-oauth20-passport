@@ -2,6 +2,9 @@
 
 > Google Oauth2.0 Auth using passport.js, and server-side rendered VIEW template using handlebar engine
 
+## OAuth 2.0
+OAuth 2.0 is the successor to OAuth 1.0, and is designed to overcome perceived shortcomings in the earlier version. The authentication flow is essentially the same. The user is first redirected to the service provider to authorize access. After authorization has been granted, the user is redirected back to the application with a code that can be exchanged for an access token. The application requesting access, known as a client, is identified by an ID and secret.
+
 ## Pre-requisite
 - Set up OAuth Client ID Credentials in Google Cloud Console, and get OAuth Client ID and Client Secret
   - Google+ API needs to be enabled if not already enabled

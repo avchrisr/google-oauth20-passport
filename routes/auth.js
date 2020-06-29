@@ -19,6 +19,8 @@ router.get(
 // @desc    Logout user
 // @route   /auth/logout
 router.get('/logout', (req, res) => {
+    // Passport exposes a logout() function on req (also aliased as logOut()) that can be called from any route handler which needs to terminate a login session.
+    // Invoking logout() will remove the req.user property and clear the login session (if any).
     req.logout()
     res.redirect('/')
 })
